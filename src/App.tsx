@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+import CurrentWeather from "./components/CurrentWeather";
+import ErrorMessage from "./components/ErrorMessage";
+import GlobalStore from "./components/GlobalStore";
+import NavBar from "./components/Navbar";
+import WeatherForecast from "./components/WeatherForecast";
+
+const App = (): JSX.Element => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <GlobalStore>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<CurrentWeather />} />
+          <Route path="/weekly" element={<WeatherForecast />} />
+          <Route path="/weekly" element={<ErrorMessage />} />
+        </Routes>
+      </GlobalStore>
+      <WeatherForecast />;
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
